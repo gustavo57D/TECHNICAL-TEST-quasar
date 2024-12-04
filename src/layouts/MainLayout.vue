@@ -1,110 +1,101 @@
 <template>
-  <q-layout view="lHh Lpr lFf">
-    <q-header elevated>
-      <q-toolbar>
-        <q-btn
-          flat
-          dense
-          round
-          icon="menu"
-          aria-label="Menu"
-          @click="leftDrawerOpen = !leftDrawerOpen"
-        />
-
-        <q-toolbar-title>
-          Quasar App
-        </q-toolbar-title>
-
-        <div>Quasar v{{ $q.version }}</div>
-      </q-toolbar>
-    </q-header>
-
+  <q-layout view="lhr lpr lfr">
     <q-drawer
       v-model="leftDrawerOpen"
       show-if-above
       bordered
       content-class="bg-grey-1"
+      :mini="miniState"
+      :width="202"
+      :breakpoint="500"
+      :style="drawerStyle"
     >
-      <q-list>
-        <q-item-label
-          header
-          class="text-grey-8"
-        >
-          Essential Links
-        </q-item-label>
-        <EssentialLink
-          v-for="link in essentialLinks"
-          :key="link.title"
-          v-bind="link"
-        />
+      <div class="logo" style="height: 10%; padding-left: 1px">
+        <LogoIcon />
+        <span>FractalUp</span>
+      </div>
+      <q-list style="height: 80%">
+        <q-item exact clickable v-ripple to="/">
+          <q-item-section avatar>
+            <q-icon name="home" />
+          </q-item-section>
+          <q-item-section> Home </q-item-section>
+        </q-item>
+        <q-item exact clickable v-ripple to="/view-one">
+          <q-item-section avatar>
+            <q-icon name="visibility" />
+          </q-item-section>
+          <q-item-section> View 1 </q-item-section>
+        </q-item>
+        <q-item exact clickable v-ripple to="/view-two">
+          <q-item-section avatar>
+            <q-icon name="visibility" />
+          </q-item-section>
+          <q-item-section> View 2 </q-item-section>
+        </q-item>
       </q-list>
+      <div class="text-right" style="padding-right: 10px">
+        <q-btn
+          dense
+          round
+          unelevated
+          color="primary"
+          icon="chevron_left"
+          class="rotate-icon"
+          :class="{ rotated: miniState }"
+          @click="miniState = !miniState"
+          v-if="$q.screen.width > 500"
+        />
+      </div>
     </q-drawer>
-
-    <q-page-container>
+    <q-btn
+      v-if="showHeader"
+      flat
+      color="primary"
+      @click="leftDrawerOpen = !leftDrawerOpen"
+      round
+      dense
+      icon="menu"
+      style="position: fixed; top: 0; left: 0; z-index: 4"
+    />
+    <q-page-container style="margin-top: -100vh">
       <router-view />
     </q-page-container>
   </q-layout>
 </template>
 
 <script lang="ts">
-
-import Vue from 'vue';
-import EssentialLink from 'components/EssentialLink.vue'
-
-const linksData = [
-  {
-    title: 'Docs',
-    caption: 'quasar.dev',
-    icon: 'school',
-    link: 'https://quasar.dev'
-  },
-  {
-    title: 'Github',
-    caption: 'github.com/quasarframework',
-    icon: 'code',
-    link: 'https://github.com/quasarframework'
-  },
-  {
-    title: 'Discord Chat Channel',
-    caption: 'chat.quasar.dev',
-    icon: 'chat',
-    link: 'https://chat.quasar.dev'
-  },
-  {
-    title: 'Forum',
-    caption: 'forum.quasar.dev',
-    icon: 'record_voice_over',
-    link: 'https://forum.quasar.dev'
-  },
-  {
-    title: 'Twitter',
-    caption: '@quasarframework',
-    icon: 'rss_feed',
-    link: 'https://twitter.quasar.dev'
-  },
-  {
-    title: 'Facebook',
-    caption: '@QuasarFramework',
-    icon: 'public',
-    link: 'https://facebook.quasar.dev'
-  },
-  {
-    title: 'Quasar Awesome',
-    caption: 'Community Quasar projects',
-    icon: 'favorite',
-    link: 'https://awesome.quasar.dev'
-  }
-];
+import Vue from "vue";
+import LogoIcon from "components/sidebar/icons/LogoIcon.vue";
 
 export default Vue.extend({
-  name: 'MainLayout',
-  components: { EssentialLink },
-  data() {
+  name: "MainLayout",
+  components: { LogoIcon },
+  data(): { leftDrawerOpen: boolean; miniState: boolean } {
     return {
       leftDrawerOpen: false,
-      essentialLinks: linksData
-    }
-  }
+      miniState: false,
+    };
+  },
+  computed: {
+    showHeader(): boolean {
+      return this.$q.screen.width <= 500 && !this.leftDrawerOpen;
+    },
+    showHeaderResponsive(): boolean {
+      return this.$q.screen.width <= 500 && this.leftDrawerOpen;
+    },
+    drawerStyle(): { [key: string]: string | number } {
+      return {
+        position: "sticky",
+        top: "0",
+        left: "0",
+        height: "100vh",
+        zIndex: this.showHeaderResponsive ? 4 : "initial", // Usar showHeader sin problemas
+      };
+    },
+  },
 });
-
 </script>
+<style scoped lang="scss">
+@import url(./MainLayout.scss);
+</style>

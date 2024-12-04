@@ -1,4 +1,4 @@
-const { resolve } = require('path');
+const { resolve } = require("path");
 
 module.exports = {
   // https://eslint.org/docs/user-guide/configuring#configuration-cascading-and-hierarchy
@@ -10,19 +10,19 @@ module.exports = {
   // Must use parserOptions instead of "parser" to allow vue-eslint-parser to keep working
   // `parser: 'vue-eslint-parser'` is already included with any 'plugin:vue/**' config and should be omitted
   parserOptions: {
-    extraFileExtensions: ['.vue'],
-    parser: '@typescript-eslint/parser',
-    project: resolve(__dirname, './tsconfig.json'),
+    extraFileExtensions: [".vue"],
+    parser: "@typescript-eslint/parser",
+    project: resolve(__dirname, "./tsconfig.json"),
     tsconfigRootDir: __dirname,
     ecmaVersion: 2018, // Allows for the parsing of modern ECMAScript features
-    sourceType: 'module' // Allows for the use of imports
+    sourceType: "module", // Allows for the use of imports
   },
 
   env: {
     browser: true,
     es2021: true,
     node: true,
-    'vue/setup-compiler-macros': true
+    "vue/setup-compiler-macros": true,
   },
 
   // Rules order is important, please avoid shuffling them
@@ -32,66 +32,64 @@ module.exports = {
 
     // https://github.com/typescript-eslint/typescript-eslint/tree/master/packages/eslint-plugin#usage
     // ESLint typescript rules
-    'plugin:@typescript-eslint/recommended',
+    "plugin:@typescript-eslint/recommended",
     // consider disabling this class of rules if linting takes too long
-    'plugin:@typescript-eslint/recommended-requiring-type-checking',
+    "plugin:@typescript-eslint/recommended-requiring-type-checking",
 
     // Uncomment any of the lines below to choose desired strictness,
     // but leave only one uncommented!
     // See https://eslint.vuejs.org/rules/#available-rules (look for Vuejs 2 ones)
-    'plugin:vue/essential', // Priority A: Essential (Error Prevention)
+    "plugin:vue/essential", // Priority A: Essential (Error Prevention)
     // 'plugin:vue/strongly-recommended', // Priority B: Strongly Recommended (Improving Readability)
     // 'plugin:vue/recommended', // Priority C: Recommended (Minimizing Arbitrary Choices and Cognitive Overhead)
 
     // https://github.com/prettier/eslint-config-prettier#installation
     // usage with Prettier, provided by 'eslint-config-prettier'.
-    'prettier'
+    "prettier",
   ],
 
   plugins: [
     // required to apply rules which need type information
-    '@typescript-eslint',
+    "@typescript-eslint",
 
     // https://eslint.vuejs.org/user-guide/#why-doesn-t-it-work-on-vue-file
     // required to lint *.vue files
-    'vue',
+    "vue",
 
-    
     // https://github.com/typescript-eslint/typescript-eslint/issues/389#issuecomment-509292674
     // Prettier has not been included as plugin to avoid performance impact
     // add it as an extension for your IDE
-    
   ],
 
   globals: {
-    ga: 'readonly', // Google Analytics
-    cordova: 'readonly',
-    __statics: 'readonly',
-    process: 'readonly',
-    Capacitor: 'readonly',
-    chrome: 'readonly'
+    ga: "readonly", // Google Analytics
+    cordova: "readonly",
+    __statics: "readonly",
+    process: "readonly",
+    Capacitor: "readonly",
+    chrome: "readonly",
   },
 
   // add your custom rules here
   rules: {
-    
-    'prefer-promise-reject-errors': 'off',
+    "prefer-promise-reject-errors": "off",
+    quotes: "off",
 
-    quotes: ['warn', 'single', { avoidEscape: true }],
+    // quotes: ['warn', 'single', { avoidEscape: true }],
 
     // this rule, if on, would require explicit return type on the `render` function
-    '@typescript-eslint/explicit-function-return-type': 'off',
+    "@typescript-eslint/explicit-function-return-type": "off",
 
     // in plain CommonJS modules, you can't use `import foo = require('foo')` to pass this rule, so it has to be disabled
-    '@typescript-eslint/no-var-requires': 'off',
+    "@typescript-eslint/no-var-requires": "off",
 
     // The core 'no-unused-vars' rules (in the eslint:recommended ruleset)
     // does not work with type definitions
-    'no-unused-vars': 'off',
+    "no-unused-vars": "off",
 
-    'vue/multi-word-component-names': 'off',
+    "vue/multi-word-component-names": "off",
 
     // allow debugger during development only
-    'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off'
-  }
-}
+    "no-debugger": process.env.NODE_ENV === "production" ? "error" : "off",
+  },
+};

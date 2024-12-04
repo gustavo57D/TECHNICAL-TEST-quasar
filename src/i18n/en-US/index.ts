@@ -2,6 +2,7 @@
 // so you can safely delete all default props below
 
 export default {
-  failed: 'Action failed',
-  success: 'Action was successful'
+  welcome: "Welcome to our app!",
+  searchPlaceholder: "Search...",
+  changeLanguage: "Change Language",
 };

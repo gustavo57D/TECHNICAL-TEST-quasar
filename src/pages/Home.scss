@@ -1,0 +1,86 @@
+.search-section {
+  width: 100%;
+  height: var(--search-section-height);
+  display: grid;
+  place-items: center;
+  position: sticky;
+  top: 0;
+  z-index: 2;
+}
+
+.my-card {
+  width: 100%;
+  max-width: 250px;
+  cursor: pointer;
+  height: 200px; /* Ajusta el alto de la tarjeta según lo que necesites */
+  position: relative;
+  overflow: hidden; /* Para asegurar que la imagen no se desborde */
+  border-radius: 8px;
+  img {
+    width: 100%; /* La imagen ocupa todo el ancho */
+    height: 70%; /* La imagen ocupa toda la altura */
+    object-fit: cover; /* Asegura que la imagen cubra el contenedor sin distorsionar */
+    object-position: center;
+  }
+  input[type="radio"]:checked + .footer {
+    background: $primary;
+    div span {
+      color: var(--sidebar-text-color);
+    }
+  }
+}
+.footer {
+  /* border-bottom-left-radius: 25px;
+    border-bottom-right-radius: 25px; */
+  height: 30%;
+  /* width: 100%; */
+  display: flex;
+  align-items: center;
+  padding: 0 8px;
+  gap: 12px;
+  div {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    overflow: hidden;
+
+    span:first-child {
+      color: var(--color);
+      text-overflow: ellipsis;
+      font-size: 18px;
+      font-weight: 900;
+      letter-spacing: -0.3px;
+      overflow: hidden;
+      white-space: nowrap;
+    }
+    span:last-child {
+      text-overflow: ellipsis;
+      color: var(--text-color);
+      font-size: 16px;
+      font-weight: 400;
+      overflow: hidden;
+      white-space: nowrap;
+      letter-spacing: normal;
+    }
+    span.placeholder {
+      height: 15px;
+      margin-bottom: 6px;
+      border-radius: 20px;
+      width: 100%;
+      background: var(--placeholder-text);
+    }
+    span:last-child.placeholder {
+      height: 13px;
+      margin-bottom: 0;
+      width: 50%;
+    }
+  }
+  .placeholder,
+  img {
+    background: var(--placeholder-text);
+    width: 50px;
+    height: 32px;
+    flex-shrink: 0;
+    border-radius: 4px;
+  }
+}
